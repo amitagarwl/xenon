@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.amitagarwl</groupId>
+    <artifactId>xenon</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>xenon</name>
+    <properties>
+        <java-version>1.8</java-version>
+        <start-class>com.github</start-class>
+        <yamparser.version>0.0.2</yamparser.version>
+        <lombok.version>1.16.6</lombok.version>
+        <restassured-version>3.3.0</restassured-version>
+        <testng-version>6.9.4</testng-version>
+        <json-version>20180813</json-version>
+        <jdbi-version>2.73</jdbi-version>
+        <jedis-version>2.6.2</jedis-version>
+        <connector-version>5.1.39</connector-version>
+        <jmeterdsl-version>0.11</jmeterdsl-version>
+        <s3-version>2.16.16</s3-version>
+    </properties>
+    <repositories>
+        <repository>
+            <name>maven</name>
+            <id>maven</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.vivekkothari</groupId>
+            <artifactId>yamlparser</artifactId>
+            <version>${yamparser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${restassured-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis-version}</version>
+        </dependency>
+         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${connector-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi</artifactId>
+            <version>${jdbi-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>${s3-version}</version>
+        </dependency>
+
+        <!-- Dependency for jmeter dsl -->
+        <dependency>
+            <groupId>us.abstracta.jmeter</groupId>
+            <artifactId>jmeter-java-dsl</artifactId>
+            <version>${jmeterdsl-version}</version>
+        </dependency>
+
+        <!-- Adding logging dependency -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+
+    </dependencies>
+
+     <profiles>
+        <profile>
+            <id>xenon</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <maven.test.failure.ignore>true</maven.test.failure.ignore>
+                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <!--<version>2.19.1</version>-->
+                        <version>3.0.0-M4</version>
+                        <configuration>
+                            <argLine>-Xmx4096M</argLine>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <properties>
+                                <property>
+                                    <name>testnames</name>
+                                    <value>${}</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.3</version>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                            <encoding>UTF-8</encoding>
+
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+    
+</project>

@@ -1,0 +1,11 @@
+<suite name="Automation Suite" verbose="1" preserve-order="true" configfailurepolicy="continue" thread-count="1">
+	    <listeners>
+		    <listener class-name="com.github.amitagarwl.listener.ListenerClass"/>
+	    </listeners>
+	<test name="Fetch MF Holdings">
+		<classes>
+			<class name="com.github.amitagarwl.test.GetMFHoldings"/>
+			<class name="com.github.amitagarwl.jmeter.ConcurrencyTest"/>
+		</classes>
+	</test>
+</suite>

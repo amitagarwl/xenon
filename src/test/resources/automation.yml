@@ -1,0 +1,23 @@
+masterDbConfig:
+  driverClass: com.mysql.jdbc.Drvier
+  url: jdbc:mysql://localhost:3306/dummy_database
+  username: super_user
+  password: super_password
+
+s3Config:
+  accessKey: XXXXXXXX123XXX
+  secretKey: XXXXXXX456XXX
+  bucketName: test_bucket
+
+redisConfig:
+  redisHost: redis://com-public-redis-host:6379/0
+  redisPassword: who_knows_the_paswwrod
+  redisKey: some.dummy.key
+
+serviceConfigMap:
+  KITE:
+    hostname: https://api.kite.trade
+    headers: X-Kite-version:3,Authorization:token api_key
+  TFS:
+    hostname: https://test.com
+    headers: token:test
